@@ -1,0 +1,118 @@
+<ng-template *ngIf="showmodal" #usuariomodal>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+
+<div id="container">
+    <div id="padre">
+
+        <select (change)="elegirTabla($event.target.value)" id="tabla" class="form-control w-25 mb-3" name="tabla">
+            <option disabled selected value>Seleccione una tabla </option>
+            <option value="tDocumento">Tabla Tipo de Documento</option>
+            <option value="tEntidad">Tabla Entidad</option>
+            <option value="tContribuyente">Tabla Tipo de Contribuyente</option>
+        </select>
+
+        <h2>Nombre de Tabla: </h2>
+
+        <h3> {{nombreTabla}} </h3>
+        <table *ngIf="nombreTabla=='tDocumento' " id="tDoc" class="table table-bordered table-hover mt-2">
+            <thead>
+                <td>Id_TipoDocumento</td>
+                <td>Codigo</td>
+                <td>Nombre</td>
+                <td>Descripcion</td>
+                <td>Estado</td>
+                <td>Acciones</td>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of datosTipoDoc">
+                    <td>{{item.id_tipo_documento}}</td>
+                    <td>{{item.codigo}} </td>
+                    <td>{{item.nombre}}</td>
+                    <td>{{item.descripcion}}</td>
+                    <td>{{item.estado.data}} </td>
+                    <td>
+                        <button class="btn btn-primary m-2 p-1" (click)="modal(usuariomodal)" data-toggle="modal" data-target="#exampleModal">Modificar</button>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+        <table *ngIf="nombreTabla=='tEntidad' " id="Ent" class="table table-bordered table-hover mt-2 ">
+            <thead>
+                <td>Id_Entidad</td>
+                <td>Id_TipoDocumento</td>
+                <td>Nro_documento</td>
+                <td>Razon Social</td>
+                <td>Nombre Comercial</td>
+                <td>Id_TipoContribuyente</td>
+                <td>Direccion</td>
+                <td>Telefono</td>
+                <td>Estado</td>
+                <td>Acciones</td>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of datosEntidad">
+                    <td>{{item.id_entidad}}</td>
+                    <td>{{item.id_tipo_documento}}</td>
+                    <td>{{item.nro_documento}}</td>
+                    <td>{{item.razon_social}} </td>
+                    <td>{{item.nombre_comercial}} </td>
+                    <td>{{item.id_tipo_contribuyente}} </td>
+                    <td>{{item.direccion}} </td>
+                    <td>{{item.telefono}} </td>
+                    <td>{{item.estado.data}} </td>
+                    <td>
+
+                        <button class="btn btn-primary m-2 p-1">Modificar</button>
+                        <button class="btn btn-danger m-2 p-1" (click)="eliminar(item.id_entidad)">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table *ngIf="nombreTabla=='tContribuyente' " id="TCont" class="table table-bordered table-hover mt-2">
+            <thead>
+                <td>Id_TipoContribuyente</td>
+                <td>Nombre</td>
+                <td>Estado</td>
+                <td>Acciones</td>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of datosTipoCon">
+                    <td>{{item.id_tipo_contribuyente}} </td>
+                    <td>{{item.nombre}} </td>
+                    <td>{{item.estado.data}} </td>
+                    <td>
+
+                        <button class="btn btn-primary m-2 p-1">Modificar</button>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
