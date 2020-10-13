@@ -8,12 +8,14 @@ import { HttpClientModule } from '@angular/common/http';
 import {DatabaseService} from './database.service';
 import { ModalContribuyenteComponent } from './modal-contribuyente/modal-contribuyente.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     ListarComponent,
     ModalComponent,
-    ModalContribuyenteComponent
+    ModalContribuyenteComponent,
+   
   ],
   imports: [
     BrowserModule,

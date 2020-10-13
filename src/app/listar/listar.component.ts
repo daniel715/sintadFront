@@ -32,6 +32,7 @@ export class ListarComponent implements OnInit {
     this.databaseservice.getTablaEntidad().subscribe(
       res => {
         this.datosEntidad = res;
+        console.log(this.datosEntidad)
       },
       err => console.log(err)
     );
