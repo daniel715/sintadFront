@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { registroContribuyente } from './interfaces/registroContribuyente'
-import { registroDocumento } from './interfaces/registroDocumento'
-import { registroEntidad } from './interfaces/registroentidad'
+
 import { HttpClient } from '@angular/common/http';
 
 
@@ -9,9 +7,6 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class DatabaseService {
-  private tb_tipoDocumento: registroDocumento[];
-  private tb_entidad: registroEntidad[];
-  private tb_tipoContribuyente: registroContribuyente[];
 
   constructor(private http: HttpClient) { }
 
@@ -28,4 +23,12 @@ export class DatabaseService {
   getTablatipoContribuyente() {
     return this.http.get(`http://localhost:4000/api/tipoContribuyente`);
   }
+
+
+  postTablaTipodocumento(data) {
+    return this.http.post(`http://localhost:4000/api/modificarTipoDocumento`, data)
+      .pipe(
+      );
+  }
+
 }

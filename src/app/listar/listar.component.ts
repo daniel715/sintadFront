@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from '../database.service'
 
-import { registroContribuyente } from '../interfaces/registroContribuyente'
-import { registroDocumento } from '../interfaces/registroDocumento'
-import { registroEntidad } from '../interfaces/registroentidad'
 
 @Component({
   selector: 'app-listar',
@@ -13,9 +10,10 @@ import { registroEntidad } from '../interfaces/registroentidad'
 export class ListarComponent implements OnInit {
   nombreTabla: String;
   showmodal: Boolean = false;
-  datosTipoDoc
-  datosEntidad
-  datosTipoCon
+  datosTipoDoc 
+  datosEntidad 
+  datosTipoCon 
+  idActual
 
   constructor(public databaseservice: DatabaseService) { }
 
@@ -43,17 +41,16 @@ export class ListarComponent implements OnInit {
   }
 
   elegirTabla(nombretabla) {
-    console.log(this.datosTipoDoc)
     this.nombreTabla = nombretabla;
   }
-  modificarRegistro() {
 
+
+  modal(id): void {
+    this.idActual = id;
+    console.log(this.idActual)
   }
 
-  modal(): void {
-    this.showmodal = true;
-    console.log(this.showmodal)
-  }
+
 
   eliminar(id) {
     console.log(id);

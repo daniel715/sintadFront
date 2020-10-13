@@ -30,8 +30,7 @@
                     <td>{{item.descripcion}}</td>
                     <td>{{item.estado.data}} </td>
                     <td>
-                        <button class="btn btn-primary m-2 p-1" (click)="modal()" data-toggle="modal" data-target="#exampleModal">Modificar</button>
-
+                        <button class="btn btn-primary m-2 p-1" (click)="modal(item.id_tipo_documento)" data-toggle="modal" data-target="#exampleModal">Modificar</button>
                     </td>
                 </tr>
             </tbody>
@@ -65,8 +64,6 @@
                     <td>{{item.telefono}} </td>
                     <td>{{item.estado.data}} </td>
                     <td>
-
-                        <button class="btn btn-primary m-2 p-1">Modificar</button>
                         <button class="btn btn-danger m-2 p-1" (click)="eliminar(item.id_entidad)">Eliminar</button>
                     </td>
                 </tr>

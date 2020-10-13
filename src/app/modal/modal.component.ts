@@ -1,42 +1,44 @@
 import { Component, OnInit } from '@angular/core';
-import {registroDocumento} from '../interfaces/registroDocumento'
-
+import {Registrodocumento} from '../interfaces/registroDocumento';
+import {DatabaseService} from '../database.service';
+import { Input } from '@angular/core';
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponent implements OnInit {
-  
-  registrodocumento : registroDocumento;
-  
-  id:String;
-  codigo:String;
-  nombre:String;
-  descripcion:String;
-  estado:Number;
+  @Input() idActual: number;
 
-  constructor() { }
+  registrodocumento = new Registrodocumento();  
+  id:number;
+  codigo:string;
+  nombre:string;
+  descripcion:string;
+  estado:number;
+
+  constructor(public databaseservice: DatabaseService ) { }
 
   ngOnInit(): void {
-  //   this.registrodocumento.id_tipo_documento="";
-  //   this.registrodocumento.codigo="";
-  //   this.registrodocumento.nombre="";
-  //   this.registrodocumento.descripcion="";
-  //   this.registrodocumento.estado=0;
+  
   }
-
-
 
   modificarRegistro(){
-    this.registrodocumento.id_tipo_documento = "este es el id"
-    // this.registroDocumento.id_tipo_documento=this.id;
-    // this.registroDocumento.codigo=this.codigo;
-    // this.registroDocumento.nombre=this.nombre;
-    // this.registroDocumento.descripcion=this.descripcion;
-    // this.registroDocumento.estado=this.estado;
-    console.log(this.registrodocumento.id_tipo_documento);
+    this.registrodocumento.id_actual=this.idActual;
+    this.registrodocumento.id_tipo_documento=this.id;
+    this.registrodocumento.codigo=this.codigo;
+    this.registrodocumento.nombre=this.nombre;
+    this.registrodocumento.descripcion=this.descripcion;
+    this.registrodocumento.estado=this.estado;
+    console.log(this.registrodocumento);
 
+    
+    this.databaseservice
+    .postTablaTipodocumento(this.registrodocumento)
+    .subscribe(res => {
+      console.log('enviado')
+    },
+    err => console.log(err)
+    );
   }
-
 }

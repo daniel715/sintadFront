@@ -1,8 +1,10 @@
-export interface registroDocumento{
-    id_tipo_documento:String;
+export class Registrodocumento{
+    id_actual: number;
+    id_tipo_documento:number;
     codigo : String;
     nombre: String;
     descripcion: String;
-    estado: Number;
+    estado: number;
+
 }
 
