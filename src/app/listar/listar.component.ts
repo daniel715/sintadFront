@@ -8,12 +8,16 @@ import { DatabaseService } from '../database.service'
   styleUrls: ['./listar.component.css']
 })
 export class ListarComponent implements OnInit {
+  modalDocumentos;
+  modalContribuyentes;
   nombreTabla: String;
-  showmodal: Boolean = false;
   datosTipoDoc 
   datosEntidad 
   datosTipoCon 
-  idActual
+  // variable para dar al componente modal el valor del id que va a modificar
+  idDocumento 
+  // variable para dar al componente modal-contribuyente el valor del id que va a modificar
+  idContribuyente
 
   constructor(public databaseservice: DatabaseService) { }
 
@@ -45,9 +49,17 @@ export class ListarComponent implements OnInit {
   }
 
 
-  modal(id): void {
-    this.idActual = id;
-    console.log(this.idActual)
+  modalDocumento(id): void {
+    this.modalContribuyentes=false;
+    this.modalDocumentos=true;
+    this.idDocumento = id;
+    console.log(this.idDocumento)
+  }
+
+  modalContribuyente(id) {
+    this.modalDocumentos=false;
+    this.modalContribuyentes=true;
+    this.idContribuyente = id;
   }
 
 

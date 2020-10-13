@@ -1,7 +1,8 @@
 <div id="container">
     <div id="padre">
 
-        <app-modal></app-modal>
+        <app-modal [id_documento]="idDocumento" *ngIf="modalDocumentos"></app-modal>
+        <app-modal-contribuyente [id_contribuyente]="idContribuyente" *ngIf="modalContribuyentes"></app-modal-contribuyente>
 
         <select (change)="elegirTabla($event.target.value)" id="tabla" class="form-control w-25 mb-3" name="tabla">
             <option disabled selected value>Seleccione una tabla </option>
@@ -30,7 +31,7 @@
                     <td>{{item.descripcion}}</td>
                     <td>{{item.estado.data}} </td>
                     <td>
-                        <button class="btn btn-primary m-2 p-1" (click)="modal(item.id_tipo_documento)" data-toggle="modal" data-target="#exampleModal">Modificar</button>
+                        <button class="btn btn-primary m-2 p-1" (click)="modalDocumento(item.id_tipo_documento)" data-toggle="modal" data-target="#exampleModal">Modificar</button>
                     </td>
                 </tr>
             </tbody>
@@ -84,7 +85,7 @@
                     <td>{{item.estado.data}} </td>
                     <td>
 
-                        <button class="btn btn-primary m-2 p-1">Modificar</button>
+                        <button (click)="modalContribuyente(item.id_tipo_contribuyente)" class="btn btn-primary m-2 p-1" data-toggle="modal" data-target="#exampleModal">Modificar</button>
 
                     </td>
                 </tr>

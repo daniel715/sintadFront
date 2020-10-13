@@ -8,9 +8,10 @@ import { Input } from '@angular/core';
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponent implements OnInit {
-  @Input() idActual: number;
+  @Input() id_documento: number;
 
   registrodocumento = new Registrodocumento();  
+
   id:number;
   codigo:string;
   nombre:string;
@@ -24,12 +25,14 @@ export class ModalComponent implements OnInit {
   }
 
   modificarRegistro(){
-    this.registrodocumento.id_actual=this.idActual;
+    console.log("Mostrando id desde componente modal", this.id_documento)
+    this.registrodocumento.id_actual=this.id_documento;
     this.registrodocumento.id_tipo_documento=this.id;
     this.registrodocumento.codigo=this.codigo;
     this.registrodocumento.nombre=this.nombre;
     this.registrodocumento.descripcion=this.descripcion;
     this.registrodocumento.estado=this.estado;
+
     console.log(this.registrodocumento);
 
     
