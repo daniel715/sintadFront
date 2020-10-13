@@ -1,38 +1,7 @@
 <div id="container">
     <div id="padre">
 
-        <div *ngIf="showmodal">
-            <div class="modal fade" id="exampleModal" tabindex="" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modificar Tabla Documento</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="false">&times;</span>
-                                  </button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="">
-                                <label for="">Id Tipo de Documento</label>
-                                <input class="form-control" type="text">
-                                <label for="">Codigo</label>
-                                <input class="form-control" type="text">
-                                <label for="">Nombre</label>
-                                <input class="form-control" type="text">
-                                <label for="">Descripcion</label>
-                                <input class="form-control" type="text">
-                                <label for="">Estado</label>
-                                <input class="form-control" type="text">
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <app-modal></app-modal>
 
         <select (change)="elegirTabla($event.target.value)" id="tabla" class="form-control w-25 mb-3" name="tabla">
             <option disabled selected value>Seleccione una tabla </option>
@@ -125,4 +94,5 @@
             </tbody>
         </table>
     </div>
+
 </div>

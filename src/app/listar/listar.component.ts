@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { DatabaseService } from '../database.service'
+
+import { registroContribuyente } from '../interfaces/registroContribuyente'
+import { registroDocumento } from '../interfaces/registroDocumento'
+import { registroEntidad } from '../interfaces/registroentidad'
 
 @Component({
   selector: 'app-listar',
@@ -6,80 +11,59 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./listar.component.css']
 })
 export class ListarComponent implements OnInit {
-  
+  nombreTabla: String;
+  showmodal: Boolean = false;
+  datosTipoDoc
+  datosEntidad
+  datosTipoCon
 
-  showmodal : Boolean = false;
-  nombreTabla:String;
-  datosTipoDoc :  [];
-  datosEntidad : [];
-  datosTipoCon : []
-  constructor() { }
+  constructor(public databaseservice: DatabaseService) { }
 
-    
-  ngOnInit(): void {
+  ngOnInit() {
+    this.databaseservice.getTablatipoContribuyente().subscribe(
+      res => {
+        this.datosTipoCon = res;
+      },
+      err => console.log(err)
+    )
+
+    this.databaseservice.getTablaEntidad().subscribe(
+      res => {
+        this.datosEntidad = res;
+      },
+      err => console.log(err)
+    );
+
+    this.databaseservice.getTablatipoDocumento().subscribe(
+      res => {
+        this.datosTipoDoc = res;
+      },
+      error => console.log(error)
+    )
   }
-  modal() : void{
-    this.showmodal=true;
+
+  elegirTabla(nombretabla) {
+    console.log(this.datosTipoDoc)
+    this.nombreTabla = nombretabla;
+  }
+  modificarRegistro() {
+
+  }
+
+  modal(): void {
+    this.showmodal = true;
     console.log(this.showmodal)
   }
 
-  eliminar(id){
+  eliminar(id) {
     console.log(id);
     fetch('http://localhost:4000/api/eliminarEntidad', {
-      method : 'post',
-      headers : {
-        'content-type' : 'application/json'
+      method: 'post',
+      headers: {
+        'content-type': 'application/json'
       },
-      body : JSON.stringify( { "id" : id} )
+      body: JSON.stringify({ "id": id })
     });
-
-    this.elegirTabla("tEntidad");
-  } 
-
-  elegirTabla(tabla:String) :void {
-    this.nombreTabla = tabla;
-    console.log(this.nombreTabla);
-
-    if(this.nombreTabla==='tEntidad'){
-      fetch('http://localhost:4000/api/entidad')
-      .then( res => res.json()
-      .then(data=> {
-        console.log(data);
-        this.datosEntidad = data;
-      })
-      )
-      .catch( err=>{
-        console.log(err)
-      })
-    }
-
-    if(this.nombreTabla==='tDocumento'){
-      fetch('http://localhost:4000/api/tipoDocumento')
-      .then( res => res.json()
-      .then(data=> {
-        console.log(data);
-        this.datosTipoDoc = data;
-      })
-      )
-      .catch( err=>{
-        console.log(err)
-      })
-    }
-
-    if(this.nombreTabla==='tContribuyente'){
-      fetch('http://localhost:4000/api/tipoContribuyente')
-      .then( res => res.json()
-      .then(data=> {
-        console.log(data);
-        this.datosTipoCon = data;
-      })
-      )
-      .catch( err=>{
-        console.log(err)
-      })
-    }
   }
-
-
 
 }
